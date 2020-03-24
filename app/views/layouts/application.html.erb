@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="navbar navbar-inverse">
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+          <span style="color: white;"><h4>Bookers</h4></span>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+
+              <li>
+                <%= link_to user_path(current_user.id) do %>
+                <span class="glyphicon glyphicon-home home" aria-hidden="true">Home</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to users_path do %>
+                <span class="glyphicon glyphicon-user" aria-hidden="true">Users</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to books_path do %>
+                <span class="glyphicon glyphicon-book" aria-hidden="true">Books</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                <span class="glyphicon glyphicon-share" aria-hidden="true">logout</span>
+                <% end %>
+              </li>
+
+            <% else %>
+              <li>
+                <%= link_to root_path do %>
+                <span class="glyphicon glyphicon-home" aria-hidden="true">Home</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to "/home/about" do %>
+                <span class="glyphicon glyphicon-link" aria-hidden="true">About</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to new_user_registration_path do %>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true">sign up</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to new_user_session_path do %>
+                <span class="glyphicon glyphicon-share" aria-hidden="true">login</span>
+                <% end %>
+              </li>
+
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <%= yield %>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3 col-xs-offset-9">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

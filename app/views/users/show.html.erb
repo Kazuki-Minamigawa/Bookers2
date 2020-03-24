@@ -1,0 +1,49 @@
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<% if flash[:update] %>
+  <div class="flash">
+    <%= flash[:update] %>
+  </div>
+<% end %>
+
+
+<div class="user_info">
+  <div class="container">
+    <div class="row">
+
+        <div class="col-xs-3">
+        <h1><strong>User info</strong></h1>
+        <table class="table table-striped">
+          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
+          <tr>
+            <td>name</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td>introduction</td>
+            <td><%= @user.introduction %></td>
+          </tr>
+        </table>
+        <div class="row">
+          <% if @user.id == current_user.id %>
+            <%= link_to edit_user_path(@user.id) do %>
+            <button class="col-xs-12 btn btn-default btn-block"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></button>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="row">
+          <%= render 'books/list', book: @book %>
+        </div>
+      </div>
+
+      <div class="col-xs-9">
+        <%= render 'users/list2', books: @books %>
+      </div>
+
+    </div>
+  </div>
+</div>
